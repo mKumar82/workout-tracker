@@ -3,32 +3,6 @@ import { MMKV } from "react-native-mmkv";
 
 export const storage = new MMKV();
 
-export const saveCredentials = (email: string, password: string) => {
-  storage.set("email", email);
-  storage.set("password", password);
-  storage.set("isLoggedIn", true);
-};
-
-export const getCredentials = () => {
-  const email = storage.getString("email");
-  const password = storage.getString("password");
-  console.log("Retrieved email:", email);
-  console.log("Retrieved password:", password);
-  return { email, password };
-};
-
-
-
-export const clearCredentials = () => {
-  storage.delete("email");
-  storage.delete("password");
-};
-
-
-
-
-
-
 // Save user on sign-up
 export const registerUser = (email: string, password: string) => {
   const usersJson = storage.getString("users");

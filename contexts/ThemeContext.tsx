@@ -2,7 +2,7 @@
 import React, { createContext, useContext, useState, ReactNode } from "react";
 import { Appearance } from "react-native";
 import { useEffect } from "react";
-import { storage } from "@/utils/storage"; // Assuming MMKV setup here
+import { storage } from "@/utils/storage"; 
 
 const lightTheme = {
   background: "#fff",
