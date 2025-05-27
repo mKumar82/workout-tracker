@@ -9,9 +9,10 @@ export default function HistoryScreen() {
   >([]);
   const { colors } = useTheme();
 
+  // Fetch workout history from storage
   useEffect(() => {
     const data = getWorkoutHistory();
-    setHistory(data.reverse()); // most recent first
+    setHistory(data.reverse());
   }, []);
 
   return (

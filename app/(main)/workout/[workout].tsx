@@ -5,6 +5,7 @@ import React, { useEffect, useState } from "react";
 import { Button, StyleSheet, Text, View } from "react-native";
 import { logWorkout } from "../../../utils/storage";
 
+// Sample workout data
 const workouts = [
   {
     id: "1",
@@ -27,6 +28,8 @@ export default function WorkoutDetail() {
   const { workout } = useLocalSearchParams<{ workout: string }>();
   const router = useRouter();
   const { colors } = useTheme();
+
+  // text to speech function
   const announceExercise = (exercise: string) => {
     Speech.speak(`Next up: ${exercise}`);
     // Replace Speech.speak temporarily
@@ -38,6 +41,7 @@ export default function WorkoutDetail() {
   const [timer, setTimer] = useState(10);
   const [isRunning, setIsRunning] = useState(false);
 
+  // useEffect to handle timer countdown and exercise transitions
   useEffect(() => {
     let interval: ReturnType<typeof setInterval>;
 
@@ -57,6 +61,7 @@ export default function WorkoutDetail() {
     return () => clearInterval(interval);
   }, [isRunning, timer]);
 
+  // useEffect to announce the current exercise
   useEffect(() => {
     if (isRunning && data) {
       announceExercise(data.exercises[current]);
@@ -65,11 +70,11 @@ export default function WorkoutDetail() {
 
   const startWorkout = () => setIsRunning(true);
 
+  // Function to complete the workout
   const completeWorkout = () => {
     setIsRunning(false);
     logWorkout(data?.title || "Unknown Workout");
     alert("Workout complete!");
-    // router.replace("/history");
   };
 
   if (!data) {

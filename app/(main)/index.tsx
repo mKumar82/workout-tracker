@@ -11,6 +11,7 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
+// Sample workout data
 const workouts = [
   {
     id: "1",
@@ -37,6 +38,7 @@ export default function HomeScreen() {
     <SafeAreaView
       style={[styles.container, { backgroundColor: colors.background }]}
     >
+      {/* theme toggle btn */}
       <Switch
         value={isDarkMode}
         onValueChange={toggleTheme}
@@ -46,6 +48,7 @@ export default function HomeScreen() {
 
       <Text style={[styles.title, { color: colors.text }]}>Workout List</Text>
 
+      {/* Workout cards */}
       <FlatList
         data={workouts}
         keyExtractor={(item) => item.id}
