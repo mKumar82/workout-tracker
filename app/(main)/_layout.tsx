@@ -4,6 +4,7 @@ import { Stack, useRouter } from "expo-router";
 import { useEffect, useState } from "react";
 import { Button } from "react-native";
 
+
 export default function AppLayout() {
   const router = useRouter();
   const [email, setEmail] = useState("");
