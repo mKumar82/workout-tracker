@@ -13,7 +13,7 @@ export default function Layout() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   console.log(isLoggedIn, " isLoggedIn");
-
+  // checks login status
   useEffect(() => {
     const checkLogin = () => {
       const status = storage.getBoolean("isLoggedIn") || false;
@@ -27,6 +27,8 @@ export default function Layout() {
     return () => clearInterval(interval);
   }, []);
 
+
+  // redirects based on login status and current route
   useEffect(() => {
     if (!isReady) return;
 
