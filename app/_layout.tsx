@@ -1,29 +1,49 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
-import { useFonts } from 'expo-font';
-import { Stack } from 'expo-router';
-import { StatusBar } from 'expo-status-bar';
-import 'react-native-reanimated';
+import { ThemeProvider } from "@/contexts/ThemeContext";
+import { Slot, useRouter, useSegments } from "expo-router";
+import { useEffect, useState } from "react";
+import { SafeAreaView } from "react-native";
+import { MMKV } from "react-native-mmkv";
 
-import { useColorScheme } from '@/hooks/useColorScheme';
+const storage = new MMKV();
 
-export default function RootLayout() {
-  const colorScheme = useColorScheme();
-  const [loaded] = useFonts({
-    SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
-  });
+export default function Layout() {
+  const segments = useSegments();
+  const router = useRouter();
+  const [isReady, setIsReady] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  if (!loaded) {
-    // Async font loading only occurs in development.
-    return null;
-  }
+  console.log(isLoggedIn, " isLoggedIn");
+
+  useEffect(() => {
+    const checkLogin = () => {
+      const status = storage.getBoolean("isLoggedIn") || false;
+      setIsLoggedIn(status);
+    };
+
+    checkLogin();
+    const interval = setInterval(checkLogin, 500); // 🔁 poll every 0.5s
+
+    setIsReady(true);
+    return () => clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
+    if (!isReady) return;
+
+    const inAuthGroup = segments[0] === "auth";
+
+    if (!isLoggedIn && !inAuthGroup) {
+      router.replace("/auth");
+    } else if (isLoggedIn && inAuthGroup) {
+      router.replace("/");
+    }
+  }, [segments, isLoggedIn, isReady]);
 
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="+not-found" />
-      </Stack>
-      <StatusBar style="auto" />
-    </ThemeProvider>
+    <SafeAreaView style={{ flex: 1 }}>
+      <ThemeProvider>
+        <Slot />
+      </ThemeProvider>
+    </SafeAreaView>
   );
 }
