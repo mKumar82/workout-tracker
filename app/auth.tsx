@@ -1,3 +1,4 @@
+import { useTheme } from "@/contexts/ThemeContext";
 import { useRouter } from "expo-router";
 import React, { useState } from "react";
 import {
@@ -11,8 +12,7 @@ import {
   TextInput,
   TouchableOpacity,
 } from "react-native";
-import { registerUser, validateUser, loginUser } from "../utils/storage";
-import { useTheme } from "@/contexts/ThemeContext";
+import { loginUser, registerUser, validateUser } from "../utils/storage";
 
 export default function AuthScreen() {
   const [email, setEmail] = useState("");
@@ -20,9 +20,9 @@ export default function AuthScreen() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [isSignUp, setIsSignUp] = useState(false);
   const router = useRouter();
-    const { colors } = useTheme();
-    
-      const { isDarkMode,toggleTheme } = useTheme();
+  const { colors } = useTheme();
+
+  const { isDarkMode, toggleTheme } = useTheme();
 
   const handleAuth = () => {
     if (!email || !password) {
@@ -52,13 +52,14 @@ export default function AuthScreen() {
     <KeyboardAvoidingView
       style={[styles.container, { backgroundColor: colors.background }]}
       behavior={Platform.select({ ios: "padding", android: undefined })}
-      >
-           <Switch
-                  value={isDarkMode}
-                  onValueChange={toggleTheme}
-                  thumbColor={isDarkMode ? "#fff" : "#000"}
-                  trackColor={{ false: "#767577", true: "#81b0ff" }}
-                />
+    >
+      {/* theme toggle btn */}
+      <Switch
+        value={isDarkMode}
+        onValueChange={toggleTheme}
+        thumbColor={isDarkMode ? "#fff" : "#000"}
+        trackColor={{ false: "#767577", true: "#81b0ff" }}
+      />
       <Text style={[styles.title, { color: colors.text }]}>
         {isSignUp ? "Create Account" : "Welcome Back"}
       </Text>
@@ -68,6 +69,7 @@ export default function AuthScreen() {
           : "Sign in with your email and password"}
       </Text>
 
+      {/* email */}
       <TextInput
         style={[
           styles.input,
@@ -85,6 +87,7 @@ export default function AuthScreen() {
         autoCapitalize="none"
       />
 
+      {/* password */}
       <TextInput
         style={[
           styles.input,
@@ -101,6 +104,7 @@ export default function AuthScreen() {
         secureTextEntry
       />
 
+      {/* confirm password */}
       {isSignUp && (
         <TextInput
           style={[
@@ -121,6 +125,7 @@ export default function AuthScreen() {
 
       <Button title={isSignUp ? "Sign Up" : "Sign In"} onPress={handleAuth} />
 
+      {/* create account */}
       <TouchableOpacity
         onPress={() => setIsSignUp(!isSignUp)}
         style={{ marginTop: 20 }}
