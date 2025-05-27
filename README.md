@@ -1,50 +1,93 @@
-# Welcome to your Expo app 👋
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+# 🏋️ Three-Screen Workout Tracker
 
-## Get started
+A simple React Native app to help you stay fit and organized. Built with Expo, this app includes:
 
-1. Install dependencies
+- 💡 Light/Dark Mode toggle (persisted)
+- 🔊 Voice cues during workouts
+- 🔐 Local authentication (Sign In / Sign Up)
+- 📊 Workout logging via MMKV (fast local storage)
 
-   ```bash
-   npm install
-   ```
+---
 
-2. Start the app
+## 📱 Screens
 
-   ```bash
-   npx expo start
-   ```
+- **Auth Screen** – Sign In / Sign Up
+- **Home Screen** – Start workouts and toggle theme
+- **Workout Detail** – Timed exercises with voice prompts
+- **History Screen** – View past workouts on a calendar
 
-In the output, you'll find options to open the app in a
+---
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+## 🚀 Getting Started
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
+### 1. Clone the repository
 
 ```bash
-npm run reset-project
+git clone https://github.com/yourusername/workout-tracker.git
+cd workout-tracker
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+### 2. Install dependencies
 
-## Learn more
+```bash
+npm install
+# or
+yarn install
+```
 
-To learn more about developing your project with Expo, look at the following resources:
+### 3. Start the Expo server
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+```bash
+npx expo start
+or 
+npx expo run:android
+npx expo run:ios
+```
 
-## Join the community
+---
 
-Join our community of developers creating universal apps.
+## 🛠 Tech Stack
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+- [React Native](https://reactnative.dev/)
+- [Expo](https://expo.dev/)
+- [MMKV Storage](https://github.com/mrousavy/react-native-mmkv)
+- [Expo Speech](https://docs.expo.dev/versions/latest/sdk/speech/)
+- [Expo Router](https://expo.github.io/router/docs)
+
+---
+
+## 📁 Folder Structure
+
+```
+.
+├── app/
+│   ├── index.tsx         # Home Screen
+│   ├── auth.tsx          # Auth Screen
+│   ├── workout/          # Workout details screen
+│   └── history.tsx       # Workout calendar
+├── contexts/
+│   └── ThemeContext.tsx  # Theme management
+├── utils/
+│   └── storage.ts        # MMKV storage functions
+```
+
+---
+
+## ✨ Features to Add
+
+- ✅ Voice cues (TTS)
+- ✅ Workout history
+- ✅ Dark mode
+
+---
+
+## 🙌 Contributing
+
+PRs are welcome! If you find bugs or want to request features, please open an issue.
+
+---
+
+## 📄 License
+
+MIT License. Use it freely and stay fit! 💪
